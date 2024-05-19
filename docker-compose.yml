@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_DATABASE=bdd_test
+      - MARIADB_USER=admin
+      - MARIADB_PASSWORD=admin
+    ports:
+      - "3306:3306"
+    networks:
+      - projet_python_mariadb
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - projet_python_mariadb
+
+volumes:
+  mariadb_data:
+
+networks:
+  projet_python_mariadb:
+    driver: bridge
